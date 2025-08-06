@@ -1,0 +1,39 @@
+package com.miproyecto.principal;
+
+import com.miproyecto.modelo.Usuario;
+import com.miproyecto.vista.LoginView;
+import com.miproyecto.controlador.LoginController;
+
+import javax.swing.SwingUtilities;
+
+/**
+ * Clase Main: Punto de entrada principal de la aplicación.
+ * Se encarga de inicializar la vista, el modelo y el controlador del login,
+ * y de hacer visible la ventana de inicio de sesión.
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        // Ejecutar la interfaz gráfica en el Event Dispatch Thread (EDT)
+        // Esto es una buena práctica en Swing para garantizar la seguridad de los hilos.
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // 1. Crear la instancia del Modelo (Usuario)
+                // Aquí se simula un usuario predefinido para la validación.
+                // En una aplicación real, esto vendría de una base de datos o archivo.
+                Usuario modeloUsuario = new Usuario("admin", "123", "administrador");
+
+                // 2. Crear la instancia de la Vista (LoginView)
+                LoginView vistaLogin = new LoginView();
+
+                // 3. Crear la instancia del Controlador (LoginController)
+                // Se le pasan la vista y el modelo para que pueda coordinar la interacción.
+                LoginController controladorLogin = new LoginController(vistaLogin, modeloUsuario);
+
+                // 4. Hacer visible la ventana de login
+                vistaLogin.setVisible(true);
+            }
+        });
+    }
+}
