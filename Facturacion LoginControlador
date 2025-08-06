@@ -1,0 +1,62 @@
+package com.miproyecto.controlador;
+
+import com.miproyecto.modelo.Usuario;
+import com.miproyecto.vista.LoginView;
+import com.miproyecto.vista.BienvenidaView; // Necesario para mostrar la siguiente vista
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/**
+ * Clase LoginController: Actúa como intermediario entre LoginView y Usuario (Modelo).
+ * Maneja los eventos de la vista y coordina las actualizaciones del modelo.
+ * Contiene la lógica para la autenticación de usuarios.
+ */
+public class LoginController {
+    private LoginView vista;
+    private Usuario modelo; // El modelo que contiene la lógica de validación
+
+    /**
+     * Constructor de LoginController.
+     * @param vista La instancia de LoginView que este controlador gestionará.
+     * @param modelo La instancia de Usuario que este controlador utilizará para la validación.
+     */
+    public LoginController(LoginView vista, Usuario modelo) {
+        this.vista = vista;
+        this.modelo = modelo;
+
+        // Añade un listener al botón de login en la vista.
+        // Cuando el botón es presionado, se ejecuta el método actionPerformed.
+        this.vista.addLoginListener(new LoginListener());
+    }
+
+    /**
+     * Clase interna privada que implementa ActionListener para manejar el evento del botón de login.
+     */
+    class LoginListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String usuario = vista.getUsuario();
+            String contrasena = vista.getContrasena();
+
+            // Validación de entradas básicas (ej. campos no vacíos)
+            if (usuario.isEmpty() || contrasena.isEmpty()) {
+                vista.mostrarMensaje("Por favor, ingrese usuario y contraseña.");
+                return; // Detiene la ejecución si los campos están vacíos
+            }
+
+            // Llama al método de validación del modelo
+            if (modelo.validarCredenciales(usuario, contrasena)) {
+                vista.mostrarMensaje("¡Inicio de sesión exitoso!");
+                vista.dispose(); // Cierra la ventana de login
+
+                // Abre la ventana de bienvenida
+                BienvenidaView bienvenidaView = new BienvenidaView(usuario);
+                bienvenidaView.setVisible(true);
+
+            } else {
+                vista.mostrarMensaje("Usuario o contraseña incorrectos.");
+            }
+        }
+    }
+}
