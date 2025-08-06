@@ -1,0 +1,36 @@
+package com.miproyecto.vista;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * Clase BienvenidaView: Una vista simple para mostrar después de un inicio de sesión exitoso.
+ */
+public class BienvenidaView extends JFrame {
+
+    /**
+     * Constructor de BienvenidaView.
+     * @param nombreUsuario El nombre del usuario que ha iniciado sesión.
+     */
+    public BienvenidaView(String nombreUsuario) {
+        setTitle("Bienvenido al Sistema");
+        setSize(400, 250);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // Centra la ventana
+
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        JLabel lblBienvenida = new JLabel("¡Bienvenido, " + nombreUsuario + "!", SwingConstants.CENTER);
+        lblBienvenida.setFont(new Font("Arial", Font.BOLD, 24));
+        lblBienvenida.setForeground(new Color(0, 100, 0)); // Color verde oscuro
+
+        JLabel lblMensaje = new JLabel("Has iniciado sesión correctamente.", SwingConstants.CENTER);
+        lblMensaje.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        panel.add(lblBienvenida, BorderLayout.CENTER);
+        panel.add(lblMensaje, BorderLayout.SOUTH);
+
+        add(panel);
+    }
+}
