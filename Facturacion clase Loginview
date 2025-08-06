@@ -1,0 +1,114 @@
+package com.miproyecto.vista;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener; // Importa ActionListener
+
+/**
+ * Clase LoginView: Representa la interfaz gráfica de usuario para el inicio de sesión.
+ * Es una ventana Swing que permite al usuario introducir su nombre de usuario y contraseña.
+ * No contiene lógica de negocio, solo se encarga de mostrar y capturar entradas.
+ */
+public class LoginView extends JFrame {
+    private JTextField txtUsuario;
+    private JPasswordField txtContrasena;
+    private JButton btnLogin;
+    private JLabel lblMensaje; // Para mostrar mensajes al usuario
+
+    /**
+     * Constructor de LoginView.
+     * Configura la ventana y sus componentes.
+     */
+    public LoginView() {
+        setTitle("Iniciar Sesión");
+        setSize(350, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // Centra la ventana en la pantalla
+        setResizable(false); // Evita que se cambie el tamaño de la ventana
+
+        // Configuración del panel principal con GridBagLayout para un diseño flexible
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Margen interno
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Espaciado entre componentes
+
+        // Componentes de la interfaz
+        JLabel lblUsuario = new JLabel("Usuario:");
+        txtUsuario = new JTextField(15); // Tamaño preferido del campo de texto
+
+        JLabel lblContrasena = new JLabel("Contraseña:");
+        txtContrasena = new JPasswordField(15);
+
+        btnLogin = new JButton("Entrar");
+        lblMensaje = new JLabel(""); // Etiqueta para mensajes (ej. errores de login)
+        lblMensaje.setForeground(Color.RED); // Color rojo para mensajes de error
+
+        // Añadir componentes al panel usando GridBagConstraints
+        gbc.gridx = 0; // Columna 0
+        gbc.gridy = 0; // Fila 0
+        gbc.anchor = GridBagConstraints.EAST; // Alinea a la derecha
+        panel.add(lblUsuario, gbc);
+
+        gbc.gridx = 1; // Columna 1
+        gbc.gridy = 0; // Fila 0
+        gbc.anchor = GridBagConstraints.WEST; // Alinea a la izquierda
+        panel.add(txtUsuario, gbc);
+
+        gbc.gridx = 0; // Columna 0
+        gbc.gridy = 1; // Fila 1
+        gbc.anchor = GridBagConstraints.EAST;
+        panel.add(lblContrasena, gbc);
+
+        gbc.gridx = 1; // Columna 1
+        gbc.gridy = 1; // Fila 1
+        gbc.anchor = GridBagConstraints.WEST;
+        panel.add(txtContrasena, gbc);
+
+        gbc.gridx = 0; // Columna 0
+        gbc.gridy = 2; // Fila 2
+        gbc.gridwidth = 2; // Ocupa 2 columnas
+        gbc.anchor = GridBagConstraints.CENTER; // Centra el botón
+        panel.add(btnLogin, gbc);
+
+        gbc.gridx = 0; // Columna 0
+        gbc.gridy = 3; // Fila 3
+        gbc.gridwidth = 2; // Ocupa 2 columnas
+        gbc.anchor = GridBagConstraints.CENTER; // Centra el mensaje
+        panel.add(lblMensaje, gbc);
+
+        add(panel); // Añade el panel a la ventana
+    }
+
+    /**
+     * Obtiene el texto del campo de usuario.
+     * @return El nombre de usuario introducido.
+     */
+    public String getUsuario() {
+        return txtUsuario.getText();
+    }
+
+    /**
+     * Obtiene la contraseña del campo de contraseña.
+     * @return La contraseña introducida.
+     */
+    public String getContrasena() {
+        return new String(txtContrasena.getPassword());
+    }
+
+    /**
+     * Establece el mensaje a mostrar al usuario (ej. error de login).
+     * @param mensaje El texto del mensaje.
+     */
+    public void mostrarMensaje(String mensaje) {
+        lblMensaje.setText(mensaje);
+    }
+
+    /**
+     * Añade un ActionListener al botón de login.
+     * Esto permite que el controlador "escuche" los clics en el botón.
+     * @param listener El ActionListener que manejará el evento.
+     */
+    public void addLoginListener(ActionListener listener) {
+        btnLogin.addActionListener(listener);
+    }
+}
