@@ -1,0 +1,86 @@
+package com.miproyecto.modelo;
+
+/**
+ * Clase Usuario: Representa la entidad de usuario en el sistema.
+ * Contiene los atributos básicos para la autenticación.
+ * Sigue el principio de encapsulamiento.
+ */
+public class Usuario {
+    private String nombreUsuario;
+    private String contrasena;
+    private String rol; // Podría ser "cliente", "vendedor", "administrador"
+
+    /**
+     * Constructor para crear una nueva instancia de Usuario.
+     * @param nombreUsuario El nombre de usuario.
+     * @param contrasena La contraseña del usuario.
+     * @param rol El rol del usuario en el sistema.
+     */
+    public Usuario(String nombreUsuario, String contrasena, String rol) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+        this.rol = rol;
+    }
+
+    // --- Métodos Getters ---
+    /**
+     * Obtiene el nombre de usuario.
+     * @return El nombre de usuario.
+     */
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    /**
+     * Obtiene la contraseña del usuario.
+     * @return La contraseña del usuario.
+     */
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    /**
+     * Obtiene el rol del usuario.
+     * @return El rol del usuario.
+     */
+    public String getRol() {
+        return rol;
+    }
+
+    // --- Métodos Setters ---
+    /**
+     * Establece el nombre de usuario.
+     * @param nombreUsuario El nuevo nombre de usuario.
+     */
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    /**
+     * Establece la contraseña del usuario.
+     * @param contrasena La nueva contraseña del usuario.
+     */
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    /**
+     * Establece el rol del usuario.
+     * @param rol El nuevo rol del usuario.
+     */
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    /**
+     * Método para simular la validación de credenciales.
+     * En una aplicación real, esto interactuaría con una base de datos.
+     * @param usuario El nombre de usuario a validar.
+     * @param contrasena La contraseña a validar.
+     * @return true si las credenciales son válidas, false en caso contrario.
+     */
+    public boolean validarCredenciales(String usuario, String contrasena) {
+        // Simulación de validación: usuario "admin" con contraseña "123"
+        return this.nombreUsuario.equals(usuario) && this.contrasena.equals(contrasena);
+    }
+}
